@@ -9,6 +9,13 @@
 # Next.js
 /.next/
 /out/
+node_modules/@next/swc-*
+
+# Next.js build output
+.next
+.next/
+.next/*
+!.next/static
 
 # Продакшн
 /build
@@ -24,7 +31,7 @@ yarn-error.log*
 
 # Локальные env файлы
 .env*.local
-
+.env
 # Vercel
 .vercel
 
