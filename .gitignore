@@ -1,1 +1,55 @@
- 
+# Зависимости
+/node_modules
+/.pnp
+.pnp.js
+
+# Тестирование
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Продакшн
+/build
+
+# Прочее
+.DS_Store
+*.pem
+
+# Отладка
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Локальные env файлы
+.env*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+
+# Временные файлы
+*.log
+*.tmp
+*.temp
+
+# Кэш
+.cache/
+
+# Файлы конфигурации
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Специфичные для вашего проекта файлы
+# Добавьте сюда файлы, которые не должны попасть в репозиторий
