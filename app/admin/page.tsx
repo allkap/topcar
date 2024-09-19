@@ -3,11 +3,18 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+interface DeliveryStage {
+  stage: string;
+  date: string;
+}
+
 interface Order {
   _id: string;
   orderNumber: string;
   customerName: string;
   carModel: string;
+  deliveryStages: DeliveryStage[];
+  currentStage: string;
 }
 
 interface Client {
@@ -34,6 +41,8 @@ export default function AdminPage() {
   const [statistics, setStatistics] = useState<Statistic[]>([]);
   const router = useRouter();
   const [editedStatistics, setEditedStatistics] = useState<{ [key: string]: string }>({});
+  const [newStage, setNewStage] = useState('');
+  const [editingOrderStages, setEditingOrderStages] = useState<Order | null>(null);
 
   useEffect(() => {
     fetchOrders();
@@ -178,6 +187,52 @@ export default function AdminPage() {
     }
   };
 
+  const handleAddStage = async (orderId: string) => {
+    if (!newStage) return;
+    try {
+      const response = await fetch(`/api/orders/${orderId}/stages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ stage: newStage }),
+      });
+
+      if (response.ok) {
+        fetchOrders();
+        setNewStage('');
+        alert('Этап доставки добавлен');
+      } else {
+        alert('Ошибка при добавлении этапа доставки');
+      }
+    } catch (error) {
+      console.error('Error adding delivery stage:', error);
+      alert('Ошибка при добавлении этапа доставки');
+    }
+  };
+
+  const handleUpdateCurrentStage = async (orderId: string, stage: string) => {
+    try {
+      const response = await fetch(`/api/orders/${orderId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ currentStage: stage }),
+      });
+
+      if (response.ok) {
+        fetchOrders();
+        alert('Текущий этап обновлен');
+      } else {
+        alert('Ошибка при обновлении текущего этапа');
+      }
+    } catch (error) {
+      console.error('Error updating current stage:', error);
+      alert('Ошибка при обновлении текущего этапа');
+    }
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Админ панель</h1>
@@ -231,9 +286,39 @@ export default function AdminPage() {
             <p><strong>Номер заказа:</strong> {order.orderNumber}</p>
             <p><strong>Имя клиента:</strong> {order.customerName}</p>
             <p><strong>Модель автомобиля:</strong> {order.carModel}</p>
+            <p><strong>Текущий этап:</strong> {order.currentStage}</p>
             <button onClick={() => handleEdit(order)} className="mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
               Редактировать
             </button>
+            <h4 className="font-bold mt-4">Этапы доставки:</h4>
+            <ul>
+              {order.deliveryStages.map((stage, index) => (
+                <li key={index} className="flex items-center">
+                  <span>{stage.stage} - {new Date(stage.date).toLocaleDateString()}</span>
+                  <button 
+                    onClick={() => handleUpdateCurrentStage(order._id, stage.stage)}
+                    className="ml-2 bg-blue-500 text-white px-2 py-1 rounded text-sm"
+                  >
+                    Установить как текущий
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-2">
+              <input
+                type="text"
+                value={newStage}
+                onChange={(e) => setNewStage(e.target.value)}
+                placeholder="Новый этап доставки"
+                className="p-2 border rounded"
+              />
+              <button
+                onClick={() => handleAddStage(order._id)}
+                className="ml-2 bg-green-500 text-white px-4 py-2 rounded"
+              >
+                Добавить этап
+              </button>
+            </div>
           </div>
         ))}
       </div>

@@ -2,6 +2,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@react-google-maps/api": "^2.19.3",
     "framer-motion": "^10.18.0",
     "mongoose": "^8.6.3",
     "next": "^13.5.7",
