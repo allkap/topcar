@@ -12,6 +12,7 @@ import PopularCars from './components/PopularCars';
 import Reviews from './components/Reviews';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
+import '../styles/globals.css';
 
 export default function Home() {
   const router = useRouter();
@@ -43,12 +44,13 @@ export default function Home() {
           <Contacts />
         </section>
       </main>
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed bottom-6 right-6 z-50">
         <button 
           onClick={handleSubmitRequest}
           className="submit-request-button pulsating-button"
         >
-          Оставить заявку
+          <span>Оставить</span>
+          <span>заявку</span>
         </button>
       </div>
       <Footer className="mt-0" />
