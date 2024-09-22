@@ -1,54 +1,29 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FaCar, FaUsers, FaClock } from 'react-icons/fa';
 
-interface Statistic {
-  key: string;
-  value: string;
-  label: string;
-}
-
-const iconMap: { [key: string]: React.ElementType } = {
-  cars: FaCar,
-  clients: FaUsers,
-  years: FaClock,
-};
-
 const Statistics: React.FC = () => {
-  const [stats, setStats] = useState<Statistic[]>([]);
-
-  useEffect(() => {
-    const fetchStatistics = async () => {
-      try {
-        const response = await fetch('/api/statistics');
-        if (response.ok) {
-          const data = await response.json();
-          setStats(data);
-        } else {
-          console.error('Failed to fetch statistics');
-        }
-      } catch (error) {
-        console.error('Error fetching statistics:', error);
-      }
-    };
-    fetchStatistics();
-  }, []);
-
   return (
-    <section className="bg-blue-600 text-white py-16">
-      <div className="container mx-auto px-6">
+    <section className="py-16 gradient-bg-1 text-white">
+      <div className="container mx-auto px-4">
+        <h2 className="section-title text-white">Наши достижения</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {stats.map((stat) => {
-            const Icon = iconMap[stat.key];
-            return (
-              <div key={stat.key} className="flex flex-col items-center text-center">
-                {Icon && <Icon className="text-5xl mb-4" />}
-                <h3 className="text-4xl font-bold mb-2">{stat.value}</h3>
-                <p className="text-xl">{stat.label}</p>
-              </div>
-            );
-          })}
+          <div className="bg-white bg-opacity-10 p-6 rounded-lg shadow-md text-center hover-lift">
+            <FaCar className="text-5xl mx-auto mb-4 text-primary" />
+            <p className="text-4xl font-bold mb-2">5000+</p>
+            <p>Доставленных автомобилей</p>
+          </div>
+          <div className="bg-white bg-opacity-10 p-6 rounded-lg shadow-md text-center hover-lift">
+            <FaUsers className="text-5xl mx-auto mb-4 text-primary" />
+            <p className="text-4xl font-bold mb-2">98%</p>
+            <p>Довольных клиентов</p>
+          </div>
+          <div className="bg-white bg-opacity-10 p-6 rounded-lg shadow-md text-center hover-lift">
+            <FaClock className="text-5xl mx-auto mb-4 text-primary" />
+            <p className="text-4xl font-bold mb-2">10+</p>
+            <p>Лет на рынке</p>
+          </div>
         </div>
       </div>
     </section>

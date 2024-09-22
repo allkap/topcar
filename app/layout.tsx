@@ -1,12 +1,10 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin', 'cyrillic'] })
+import { Metadata } from 'next'
+import '../styles/globals.css'
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export const metadata: Metadata = {
-  title: 'TOPCAR - Импорт автомобилей из Китая',
-  description: 'Ведущая компания по импорту качественных автомобилей из Китая',
+  title: 'Наш сайт',
+  description: 'Описание нашего сайта',
 }
 
 export default function RootLayout({
@@ -16,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

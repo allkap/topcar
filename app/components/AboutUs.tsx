@@ -3,24 +3,31 @@ import Image from 'next/image';
 
 const AboutUs: React.FC = () => {
   return (
-    <section id="о нас" className="bg-gradient-to-b from-blue-50 to-white py-20">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <Image src="/images/about-us.jpg" alt="О нас" width={500} height={300} className="rounded-lg shadow-lg" />
-          </div>
-          <div className="md:w-1/2 md:pl-12">
-            <h2 className="text-4xl font-bold mb-6 text-blue-600">О компании TOPCAR</h2>
-            <p className="text-xl text-gray-700 leading-relaxed mb-6">
-              TOPCAR - ведущая компания по импорту автомобилей из Китая. Наша миссия - предоставить нашим клиентам доступ к качественным автомобилям по доступным ценам.
-            </p>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              С TOPCAR вы получаете надежность, комфорт и инновации прямо из сердца автомобильной индустрии Китая.
-            </p>
-          </div>
+    <div className="w-full max-w-6xl mx-auto px-4 py-16 flex flex-col md:flex-row items-center justify-between">
+      <div className="md:w-1/2 mb-8 md:mb-0">
+        <h2 className="text-4xl font-bold mb-6 text-gray-800">О нас</h2>
+        <p className="text-lg text-gray-600 mb-6">
+          Мы - компания, специализирующаяся на доставке автомобилей по всей России. Наша миссия - обеспечить безопасную и своевременную доставку вашего автомобиля, куда бы вы ни отправлялись.
+        </p>
+        <ul className="list-disc list-inside text-gray-600">
+          <li>Более 10 лет опыта в сфере автоперевозок</li>
+          <li>Профессиональная команда водителей и логистов</li>
+          <li>Современный автопарк и передовые технологии отслеживания</li>
+          <li>Индивидуальный подход к каждому клиенту</li>
+        </ul>
+      </div>
+      <div className="md:w-1/2 flex justify-center">
+        <div className="relative w-full max-w-md h-80">
+          <Image
+            src="/about-us-image.jpg" // Замените на путь к вашему изображению
+            alt="О нашей компании"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg shadow-lg"
+          />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
