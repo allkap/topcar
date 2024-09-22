@@ -1,12 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CostCalculator: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const handleShowForm = () => setShowForm(true);
+    window.addEventListener('showCostCalculatorForm', handleShowForm);
+    return () => window.removeEventListener('showCostCalculatorForm', handleShowForm);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

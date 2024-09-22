@@ -1,0 +1,64 @@
+.submit-request-button {
+  background-color: #4CAF50;
+  color: white;
+  width: 120px; /* Уменьшили с 150px */
+  height: 120px; /* Уменьшили с 150px */
+  border: none;
+  border-radius: 50%;
+  font-size: 16px; /* Уменьшили с 18px */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.submit-request-button span {
+  display: block;
+  line-height: 1.2;
+}
+
+.submit-request-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.4s;
+}
+
+.submit-request-button:hover::before {
+  left: 100%;
+}
+
+.submit-request-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+.pulsating-button {
+  animation: pulsate 2s infinite;
+}
+
+/* ... остальные стили остаются без изменений ... */

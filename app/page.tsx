@@ -1,4 +1,6 @@
-import Link from 'next/link';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Header from './components/Header';
 import AboutUs from './components/AboutUs';
 import Statistics from './components/Statistics';
@@ -9,8 +11,18 @@ import PopularCars from './components/PopularCars';
 import Reviews from './components/Reviews';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
+import '../styles/globals.css';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleSubmitRequest = () => {
+    router.push('/#калькулятор');
+    setTimeout(() => {
+      window.dispatchEvent(new Event('showCostCalculatorForm'));
+    }, 100);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -23,10 +35,14 @@ export default function Home() {
         <PopularCars />
         <Reviews />
         <Contacts />
-        <div className="fixed bottom-4 right-4">
-          <Link href="/admin" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-            Админ панель
-          </Link>
+        <div className="fixed bottom-6 right-6 z-50"> {/* Изменили с bottom-8 right-8 на bottom-6 right-6 */}
+          <button 
+            onClick={handleSubmitRequest}
+            className="submit-request-button pulsating-button"
+          >
+            <span>Оставить</span>
+            <span>заявку</span>
+          </button>
         </div>
       </main>
       <Footer />
